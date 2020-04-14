@@ -2,7 +2,7 @@
 
 **Custom chromecast receiver to display webpages without tab casting**
 
-Try it with the [sender demo](https://chinasaur.github.io/url-cast-receiver).
+Try it with the [sender demo](https://chinasaur.github.io/url-cast-receiver/index.html).
 
 ## Usage
 
@@ -56,6 +56,7 @@ session.sendMessage(namespace, msg, onSuccess, onErr);
 The MIT License (MIT)
 
 Copyright (c) 2015 Sterling DeMille &lt;sterlingdemille@gmail.com&gt;
+
 Copyright (c) 2020 Peter Li &lt;chinasaurli@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
