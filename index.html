@@ -117,14 +117,11 @@
 
   <div id="notifications"></div>
 
-  <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
   <script type="text/javascript">
-
     // click handlers
     document.getElementById('requestSession').onclick = function() {
       chrome.cast.requestSession(sessionListener, onErr);
     };
-
     document.getElementById('send').onclick = function() {
       var url = document.getElementById('url').value
         , type = document.getElementById('type').value;
@@ -132,12 +129,22 @@
       sendMessage({type: type, url: url});
     };
 
+    // set form values if given
+    window.onload = function() {
+      var searchParams = new URL(document.location).searchParams
+      if (searchParams.has('url')) {
+        document.getElementById('url').value = searchParams.get('url')
+      }
+      if (searchParams.has('type')) {
+        document.getElementById('type').value = searchParams.get('type')
+      }
+    }
+
+    // initialize
     var applicationID = '5CB45E5A'
       , namespace = 'urn:x-cast:com.url.cast'
       , receiverDead = false
       , session = null;
-
-    // initialize
     window.__onGCastApiAvailable = function(loaded) {
       if (loaded) initializeCastApi();
     };
@@ -174,9 +181,11 @@
     }
 
     function receiverListener(e) {
-      (e === 'available')
-        ? console.log('receiver found')
-        : console.log('no receivers found');
+      if (e === 'available') {
+        console.log('receiver found')
+      } else {
+        console.log('no receivers found');
+      }
     }
 
     function sessionUpdateListener(isAlive) {
@@ -260,7 +269,7 @@
       document.getElementById('step1').classList.remove('complete');
       document.getElementById('step2').classList.add('notready');
     }
-
   </script>
+  <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 </body>
 </html>
